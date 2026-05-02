@@ -80,245 +80,245 @@ const departmentKnowledge = [
 ];
 
 const sampleCases = {
-  normal: {
-    label: "OPD ปกติ",
-    description: "ข้อมูลครบ แนะนำอายุรกรรม",
+  green: {
+    id: "green",
+    label: "สีเขียว",
+    description: "อาการทั่วไป",
+    tone: "green",
     channel: "morphrom",
-    voiceMode: false,
     identity: {
-      name: "สมชาย ใจดี",
+      name: "นายสมชาย ใจดี",
       age: "46 ปี",
       sex: "ชาย",
+      hn: "123456",
       cid: "x-xxxx-xxxxx-21-7",
       contact: "089-xxx-4210",
     },
-    fields: {
-      chiefComplaint: "ไอ เจ็บคอ มีไข้ต่ำ",
-      duration: "3 วัน",
-      severity: "4/10 ยังเดินได้ ไม่มีหอบ",
-      allergies: "ปฏิเสธแพ้ยา",
-      medications: "ยาลดความดัน amlodipine",
-      conditions: "ความดันโลหิตสูง",
-      recentCare: "ซื้อยาลดไข้รับประทานเอง อาการดีขึ้นเล็กน้อย",
-      preferredHospital: "OPD อายุรกรรม โรงพยาบาลกลาง",
+    scripts: {
+      text: {
+        initialBot: "สวัสดีค่ะ หมอพร้อม AI พร้อมช่วยบันทึกข้อมูลก่อนพบเจ้าหน้าที่ วันนี้มีอาการอะไรคะ",
+        steps: [
+          {
+            patient: "ปวดหัวตึบๆ มีน้ำมูกใส ไอแห้งๆ มาสองวันครับ กินพาราไปเมื่อเช้าก็ยังไม่ค่อยดีขึ้น",
+            fields: {
+              chiefComplaint: "ปวดศีรษะ มีน้ำมูกใส ไอแห้ง",
+              duration: "2 วัน",
+              medications: "รับประทานพาราเซตามอลเมื่อเช้า อาการยังไม่ค่อยดีขึ้น",
+              recentCare: "รับประทานพาราเซตามอลเองเมื่อเช้า",
+              preferredHospital: "อายุรกรรมทั่วไป",
+            },
+            bot: "ระบบบันทึกอาการปวดศีรษะ มีน้ำมูก และไอมา 2 วันนะคะ เพื่อประเมินความเร่งด่วน ระดับความปวดจาก 1 ถึง 10 ให้คะแนนเท่าไหร่คะ?",
+          },
+          {
+            patient: "ปวดประมาณ 4 ครับ",
+            fields: {
+              severity: "Pain score 4/10",
+            },
+            bot: "เข้าใจแล้วค่ะ ขอทราบเพิ่มเติมว่าคุณมีประวัติแพ้ยา หรือโรคประจำตัวอะไรไหมคะ?",
+          },
+          {
+            patient: "ไม่มีโรคประจำตัวครับ ไม่เคยแพ้ยา",
+            fields: {
+              allergies: "ไม่มีประวัติแพ้ยา",
+              conditions: "ไม่มีโรคประจำตัว",
+            },
+            bot: "ขอบคุณค่ะ ประวัติของคุณถูกส่งไปยังพยาบาลแล้ว เบื้องต้นแนะนำเข้ารับการตรวจที่ แผนกอายุรกรรมทั่วไป ค่ะ กรุณารอเรียกคิวนะคะ",
+            complete: true,
+          },
+        ],
+      },
+      voice: {
+        initialBot: "สวัสดีค่ะ หมอพร้อม AI พร้อมช่วยบันทึกข้อมูลก่อนพบเจ้าหน้าที่ กดไมโครโฟนแล้วเล่าอาการได้เลยค่ะ",
+        steps: [
+          {
+            patient: "ปวดหัวตึบๆ มีน้ำมูกใส ไอแห้งๆ มาสองวันครับ กินพาราไปเมื่อเช้าก็ยังไม่ค่อยดีขึ้น",
+            fields: {
+              chiefComplaint: "ปวดศีรษะ มีน้ำมูกใส ไอแห้ง",
+              duration: "2 วัน",
+              medications: "รับประทานพาราเซตามอลเมื่อเช้า อาการยังไม่ค่อยดีขึ้น",
+              recentCare: "รับประทานพาราเซตามอลเองเมื่อเช้า",
+              preferredHospital: "อายุรกรรมทั่วไป",
+            },
+            bot: "ระบบบันทึกอาการปวดศีรษะ มีน้ำมูก และไอมา 2 วันนะคะ เพื่อประเมินความเร่งด่วน ระดับความปวดจาก 1 ถึง 10 ให้คะแนนเท่าไหร่คะ?",
+            audio: "src/sample_triage_green/triage_green_1.mp3",
+          },
+          {
+            patient: "ปวดประมาณ 4 ครับ",
+            fields: {
+              severity: "Pain score 4/10",
+            },
+            bot: "เข้าใจแล้วค่ะ ขอทราบเพิ่มเติมว่าคุณมีประวัติแพ้ยา หรือโรคประจำตัวอะไรไหมคะ?",
+            audio: "src/sample_triage_green/triage_green_2.mp3",
+          },
+          {
+            patient: "ไม่มีโรคประจำตัวครับ ไม่เคยแพ้ยา",
+            fields: {
+              allergies: "ไม่มีประวัติแพ้ยา",
+              conditions: "ไม่มีโรคประจำตัว",
+            },
+            bot: "ขอบคุณค่ะ ประวัติของคุณถูกส่งไปยังพยาบาลแล้ว เบื้องต้นแนะนำเข้ารับการตรวจที่ แผนกอายุรกรรมทั่วไป ค่ะ กรุณารอเรียกคิวนะคะ",
+            audio: "src/sample_triage_green/triage_green_3.mp3",
+            complete: true,
+          },
+        ],
+      },
     },
-    transcript: [
-      ["bot", "สวัสดีค่ะ ระบบหมอพร้อม AI ขอซักประวัติเบื้องต้นก่อนพบเจ้าหน้าที่"],
-      ["patient", "มีไข้ต่ำ ไอ เจ็บคอมา 3 วันครับ"],
-      ["bot", "มีอาการหอบ เหนื่อยมาก เจ็บหน้าอก หรือซึมลงไหมคะ"],
-      ["patient", "ไม่มีครับ ยังเดินได้ แค่เจ็บคอและไอ"],
-      ["bot", "แพ้ยา หรือมียาที่ใช้ประจำไหมคะ"],
-      ["patient", "ไม่แพ้ยา ใช้ยาลดความดัน amlodipine"],
-    ],
+    output: {
+      type: "green",
+      header: "ตั๋วคัดกรองล่วงหน้า",
+      status: "ระบบบันทึกข้อมูลเรียบร้อย",
+      symptomTitle: "สรุปอาการเบื้องต้น",
+      symptoms: ["ปวดศีรษะ มีน้ำมูกใส ไอแห้ง", "Onset: 2 วัน"],
+      metrics: [
+        ["Pain Score", "4/10"],
+        ["ประวัติแพ้ยา", "ไม่มี"],
+        ["แผนกที่แนะนำ", "อายุรกรรมทั่วไป (General Medicine)"],
+      ],
+      action: "แสดง QR Code เพื่อรับคิว",
+      instruction: "กรุณานำ QR Code นี้ไปสแกนที่ตู้ Kiosk โซน A เมื่อถึงโรงพยาบาล เพื่อรับคิวเข้าพบแพทย์ค่ะ",
+    },
   },
-  incomplete: {
-    label: "ข้อมูลยังไม่ครบ",
-    description: "ให้บอทถาม follow-up",
-    channel: "line",
-    voiceMode: false,
-    identity: {
-      name: "กานดา พิมพ์ใจ",
-      age: "31 ปี",
-      sex: "หญิง",
-      cid: "x-xxxx-xxxxx-84-2",
-      contact: "092-xxx-1188",
-    },
-    fields: {
-      chiefComplaint: "ปวดเข่าขวาหลังวิ่ง",
-      duration: "",
-      severity: "",
-      allergies: "",
-      medications: "ไม่มียาประจำ",
-      conditions: "ปฏิเสธโรคประจำตัว",
-      recentCare: "",
-      preferredHospital: "โรงพยาบาลใกล้บ้าน",
-    },
-    transcript: [
-      ["bot", "สวัสดีค่ะ LINE OA หมอพร้อมช่วยเก็บข้อมูลก่อนส่งต่อ OPD"],
-      ["patient", "ปวดเข่าขวาหลังวิ่ง อยากทราบว่าควรไปแผนกไหน"],
-      ["bot", "ขอทราบระดับความปวด ระยะเวลาที่เป็น และมีอุบัติเหตุร่วมด้วยไหมคะ"],
-      ["patient", "ไม่มีอุบัติเหตุค่ะ"],
-    ],
-  },
-  emergency: {
-    label: "Red flag",
-    description: "ระบบหยุด routing ปกติ",
+  red: {
+    id: "red",
+    label: "สีแดง",
+    description: "ฉุกเฉินวิกฤต",
+    tone: "red",
     channel: "morphrom",
-    voiceMode: false,
     identity: {
-      name: "ประเสริฐ วัฒนะ",
+      name: "นายสมชาย ใจดี",
       age: "62 ปี",
       sex: "ชาย",
-      cid: "x-xxxx-xxxxx-06-9",
-      contact: "081-xxx-9002",
+      hn: "123456",
+      cid: "x-xxxx-xxxxx-21-7",
+      contact: "089-xxx-4210",
     },
-    fields: {
-      chiefComplaint: "แน่นหน้าอก เหนื่อยมาก เหงื่อแตก",
-      duration: "เริ่ม 40 นาที ก่อนติดต่อ",
-      severity: "9/10",
-      allergies: "ไม่ทราบ",
-      medications: "ยาเบาหวานและยาความดัน ไม่ทราบชื่อ",
-      conditions: "เบาหวาน ความดัน ไขมันสูง",
-      recentCare: "ยังไม่ได้รับการรักษา",
-      preferredHospital: "ใกล้ที่สุด",
+    scripts: {
+      text: {
+        initialBot: "สวัสดีค่ะ หมอพร้อม AI พร้อมช่วยบันทึกข้อมูลก่อนพบเจ้าหน้าที่ วันนี้มีอาการอะไรคะ",
+        steps: [
+          {
+            patient: "หมอครับ รู้สึกแน่นหน้าอก หายใจไม่ออกเลยครับ ร้าวไปที่แขนซ้ายด้วย",
+            fields: {
+              chiefComplaint: "แน่นหน้าอก หายใจไม่ออก ร้าวไปแขนซ้าย",
+              duration: "เริ่มก่อนเข้าระบบคัดกรอง",
+              severity: "เข้าข่ายฉุกเฉินเร่งด่วนทางหัวใจ",
+              allergies: "ยังไม่ระบุ",
+              medications: "ยังไม่ระบุ",
+              conditions: "ยังไม่ระบุ",
+              recentCare: "ยังไม่ได้รับการรักษา",
+              preferredHospital: "ห้องฉุกเฉิน (ER)",
+            },
+            bot: "แจ้งเตือนฉุกเฉิน! จากอาการของคุณอาจเป็นภาวะฉุกเฉินเร่งด่วนทางหัวใจ ระบบได้ส่งตำแหน่งและแจ้งห้องฉุกเฉินแล้ว กรุณานั่งพักนิ่งๆ หากท่านอยู่บ้านกรุณากดโทร 1669 หรือหากอยู่โรงพยาบาล โปรดแจ้งเจ้าหน้าที่ทันทีค่ะ!",
+            complete: true,
+          },
+        ],
+      },
+      voice: {
+        initialBot: "สวัสดีค่ะ หมอพร้อม AI พร้อมช่วยบันทึกข้อมูลก่อนพบเจ้าหน้าที่ กดไมโครโฟนแล้วเล่าอาการได้เลยค่ะ",
+        steps: [
+          {
+            patient: "หมอครับ รู้สึกแน่นหน้าอก หายใจไม่ออกเลยครับ ร้าวไปที่แขนซ้ายด้วย",
+            fields: {
+              chiefComplaint: "แน่นหน้าอก หายใจไม่ออก ร้าวไปแขนซ้าย",
+              duration: "เริ่มก่อนเข้าระบบคัดกรอง",
+              severity: "เข้าข่ายฉุกเฉินเร่งด่วนทางหัวใจ",
+              allergies: "ยังไม่ระบุ",
+              medications: "ยังไม่ระบุ",
+              conditions: "ยังไม่ระบุ",
+              recentCare: "ยังไม่ได้รับการรักษา",
+              preferredHospital: "ห้องฉุกเฉิน (ER)",
+            },
+            bot: "แจ้งเตือนฉุกเฉิน! จากอาการของคุณอาจเป็นภาวะฉุกเฉินเร่งด่วนทางหัวใจ ระบบได้ส่งตำแหน่งและแจ้งห้องฉุกเฉินแล้ว กรุณานั่งพักนิ่งๆ หากท่านอยู่บ้านกรุณากดโทร 1669 หรือหากอยู่โรงพยาบาล โปรดแจ้งเจ้าหน้าที่ทันทีค่ะ!",
+            audio: "src/sample_triage_red/triage_red_1.mp3",
+            complete: true,
+          },
+        ],
+      },
     },
-    transcript: [
-      ["bot", "ขอซักประวัติเพื่อคัดกรองเบื้องต้นค่ะ"],
-      ["patient", "แน่นหน้าอกมาก หายใจลำบาก เหนื่อย เหงื่อออก"],
-      ["bot", "อาการนี้เข้าข่ายฉุกเฉิน ระบบจะแจ้งเจ้าหน้าที่และแนะนำให้ติดต่อ 1669 ทันที"],
-    ],
+    output: {
+      type: "red",
+      header: "ภาวะฉุกเฉินเร่งด่วน!",
+      status: "ข้อมูลถูกส่งเข้าห้องฉุกเฉิน (ER) ทันที",
+      symptomTitle: "สรุปอาการเบื้องต้น",
+      symptoms: ["แน่นหน้าอก", "หายใจไม่ออก", "ร้าวไปแขนซ้าย"],
+      safety: "กรุณางดการเคลื่อนไหว นั่งพักในที่อากาศถ่ายเท",
+      action: "โทร 1669 ศูนย์กู้ชีพทันที",
+      instruction: "ระบบได้ส่งตำแหน่ง GPS ของคุณให้ห้องฉุกเฉินโรงพยาบาลเรียบร้อยแล้ว",
+    },
   },
-  voice: {
-    label: "Voicebot",
-    description: "รองรับ STT/TTS ภาษาไทย",
-    channel: "line",
-    voiceMode: true,
-    identity: {
-      name: "นภา ศรีสุข",
-      age: "28 ปี",
-      sex: "หญิง",
-      cid: "x-xxxx-xxxxx-67-4",
-      contact: "095-xxx-7791",
-    },
-    fields: {
-      chiefComplaint: "เวียนศีรษะ คลื่นไส้เล็กน้อย",
-      duration: "ตั้งแต่เช้า",
-      severity: "5/10 ไม่มีหมดสติ",
-      allergies: "แพ้ penicillin",
-      medications: "ไม่มี",
-      conditions: "ไมเกรนเป็นบางครั้ง",
-      recentCare: "พักผ่อนและดื่มน้ำ ยังไม่ดีขึ้น",
-      preferredHospital: "OPD อายุรกรรม หลัง 14:00",
-    },
-    transcript: [
-      ["bot", "กดไมโครโฟนแล้วพูดอาการได้เลยค่ะ"],
-      ["patient", "เวียนหัวตั้งแต่เช้า คลื่นไส้นิดหน่อย ไม่ได้หมดสติ"],
-      ["bot", "ระบบถอดเสียงเรียบร้อย ขอถามประวัติแพ้ยาเพิ่มเติมค่ะ"],
-      ["patient", "แพ้ยาเพนิซิลลินค่ะ"],
-    ],
-  },
-};
-
-const triageScripts = {
-  voice: {
+  blue: {
+    id: "blue",
+    label: "สีฟ้า",
+    description: "ข้อมูลซับซ้อน",
+    tone: "blue",
     channel: "morphrom",
     identity: {
-      name: "ผู้รับบริการ",
-      age: "ตั้งครรภ์ 22 สัปดาห์",
-      sex: "หญิง",
-      cid: "x-xxxx-xxxxx-42-8",
-      contact: "09x-xxx-4821",
-    },
-    initialBot: "สวัสดีค่ะ หมอพร้อม AI พร้อมช่วยบันทึกข้อมูลก่อนพบเจ้าหน้าที่ กดไมโครโฟนแล้วเล่าอาการได้เลยค่ะ",
-    steps: [
-      {
-        patient: "สวัสดีค่ะ ตอนนี้ตั้งครรภ์ได้ 22 สัปดาห์ แล้วรู้สึกปวดแสบเวลาปัสสาวะมาตั้งแต่เมื่อวานค่ะ",
-        fields: {
-          chiefComplaint: "ตั้งครรภ์ 22 สัปดาห์ มีปัสสาวะแสบขัด",
-          duration: "ตั้งแต่เมื่อวาน ประมาณ 1 วัน",
-          conditions: "ตั้งครรภ์ 22 สัปดาห์",
-          preferredHospital: "ส่งต่อพยาบาลคัดกรอง/สูตินรีเวช",
-        },
-        bot: "รับทราบค่ะ เพื่อข้อมูลที่ครบถ้วนสำหรับพยาบาล รบกวนขอข้อมูลเพิ่มเติมนะคะ: นอกจากอาการแสบขัดแล้ว คุณแม่มีอาการปวดหลังร่วมด้วยไหมคะ หรือมีอาการปวดหน่วงบริเวณท้องน้อยหรือเปล่า?",
-        audio: "src/sample_triage_01/triage1_1.mp3",
-      },
-      {
-        patient: "มีอาการปวดหน่วงๆ ที่ท้องน้อยค่ะ แต่ปวดหลังไม่มีนะคะ",
-        fields: {
-          severity: "ปวดหน่วงท้องน้อย ปฏิเสธอาการปวดหลัง",
-        },
-        bot: "ขอบคุณค่ะ แล้วตั้งแต่วันเมื่อวานจนถึงตอนนี้ คุณแม่มีอาการไข้ หนาวสั่น หรือรู้สึกคลื่นไส้อาเจียนบ้างไหมคะ?",
-        audio: "src/sample_triage_01/triage1_2.mp3",
-      },
-      {
-        patient: "ไม่มีไข้ค่ะ ลองวัดดูแล้วได้ 36.5 องศา แต่รู้สึกอ่อนเพลียนิดหน่อยค่ะ",
-        fields: {
-          severity: "ปวดหน่วงท้องน้อย อ่อนเพลียเล็กน้อย ไม่มีไข้ วัดได้ 36.5°C ไม่มีปวดหลัง",
-        },
-        bot: "ขอบคุณสำหรับข้อมูลค่ะ รบกวนสอบถามลักษณะของปัสสาวะนิดนึงนะคะ ปัสสาวะมีสีขุ่น มีเลือดปน หรือมีกลิ่นผิดปกติไปจากเดิมบ้างไหมคะ?",
-        audio: "src/sample_triage_01/triage1_3.mp3",
-      },
-      {
-        patient: "ปัสสาวะดูขุ่นกว่าปกตินิดหน่อยค่ะ ไม่มีเลือดนะคะ แล้วก็พยายามดื่มน้ำเยอะขึ้นกับกินสารสกัดแครนเบอร์รี่แล้วแต่อาการยังไม่ดีขึ้นค่ะ",
-        fields: {
-          recentCare: "ดื่มน้ำมากขึ้นและรับประทานสารสกัดแครนเบอร์รี่แล้ว แต่อาการยังไม่ดีขึ้น",
-        },
-        bot: "รับทราบค่ะ ข้อมูลสุดท้ายก่อนสรุปส่งต่อให้พยาบาลนะคะ: คุณแม่มีโรคประจำตัวอื่นๆ หรือมีประวัติแพ้ยาตัวไหนไหมคะ? และช่วงนี้ได้ทานยาตัวไหนอยู่เป็นประจำหรือเปล่า?",
-        audio: "src/sample_triage_01/triage1_4.mp3",
-      },
-      {
-        patient: "ไม่มีโรคประจำตัวค่ะ ไม่แพ้ยาอะไร ปกติทานแค่แคปซูลวิตามินบำรุงครรภ์ที่หมอสั่งให้ค่ะ",
-        fields: {
-          allergies: "ปฏิเสธประวัติแพ้ยา",
-          medications: "วิตามินบำรุงครรภ์ตามแพทย์สั่ง",
-          conditions: "ตั้งครรภ์ 22 สัปดาห์ ปฏิเสธโรคประจำตัวอื่น",
-        },
-        complete: true,
-      },
-    ],
-  },
-  text: {
-    channel: "morphrom",
-    identity: {
-      name: "ผู้รับบริการ",
-      age: "72 ปี",
+      name: "นายสมชาย ใจดี",
+      age: "46 ปี",
       sex: "ชาย",
-      cid: "x-xxxx-xxxxx-72-3",
-      contact: "08x-xxx-7201",
+      hn: "123456",
+      cid: "x-xxxx-xxxxx-21-7",
+      contact: "089-xxx-4210",
     },
-    initialBot: "สวัสดีครับ หมอพร้อม AI พร้อมช่วยบันทึกข้อมูลก่อนพบเจ้าหน้าที่ วันนี้ต้องการปรึกษาอาการอะไรครับ",
-    steps: [
-      {
-        patient: "สวัสดีจ้ะลูก หมอคอมพิวเตอร์ช่วยหน่อย ตาอายุ 72 แล้ว วันนี้รู้สึกเพลียๆ แล้วก็เวียนหัวตั้งแต่ตื่นนอนเลย เดินไปห้องน้ำก็เหมือนจะวูบ",
-        fields: {
-          chiefComplaint: "เวียนศีรษะ อ่อนเพลีย และมีอาการคล้ายจะวูบ",
-          duration: "ตั้งแต่ตื่นนอนวันนี้",
-          preferredHospital: "ให้พยาบาลคัดกรองประเมินต่อ",
-        },
-        bot: "สวัสดีครับคุณตา ผมจะช่วยบันทึกข้อมูลเพื่อเตรียมไว้ให้คุณพยาบาลนะครับ รบกวนสอบถามคุณตานิดนึงครับว่า เมื่อเช้าตอนที่รู้สึกจะวูบ คุณตาได้มีการล้มหรือมีส่วนไหนของร่างกายกระแทกพื้นบ้างไหมครับ?",
-        audio: "src/sample_triage_02/triage2_1.mp3",
+    scripts: {
+      text: {
+        initialBot: "สวัสดีค่ะ หมอพร้อม AI พร้อมช่วยบันทึกข้อมูลก่อนพบเจ้าหน้าที่ วันนี้มีอาการอะไรคะ",
+        steps: [
+          {
+            patient: "คือปวดหัวครับ ปวดมาหลายวัน แต่ว่าเมื่อวานเหมือนเจ็บที่เข่าด้วย แล้วก็รู้สึกมึนๆ เหมือนจะอ้วกตอนเช้า... อ้อ กินยาแก้แพ้ไปตอนดึก ไม่แน่ใจว่าเกี่ยวไหม แต่ตอนนี้ชาๆ ที่ปลายนิ้วครับ",
+            fields: {
+              chiefComplaint: "ปวดศีรษะหลายวัน ร่วมกับเจ็บเข่า คลื่นไส้ตอนเช้า และชาปลายนิ้ว",
+              duration: "ปวดศีรษะหลายวัน เจ็บเข่าเมื่อวาน",
+              severity: "ข้อมูลซับซ้อน ต้องประเมินซ้ำโดยพยาบาล",
+              allergies: "ทานยาแก้แพ้ตอนดึก ไม่แน่ใจความเกี่ยวข้อง",
+              medications: "ยาแก้แพ้",
+              conditions: "ยังไม่ชัดเจน",
+              recentCare: "ยังไม่มีข้อมูลการรักษาล่าสุด",
+              preferredHospital: "จุดคัดกรองกลาง (Central Triage)",
+            },
+            bot: "ข้อมูลอาการของคุณมีความซับซ้อน เพื่อความถูกต้องและปลอดภัยสูงสุด ระบบได้ส่งข้อมูลเบื้องต้นให้พยาบาลวิชาชีพประเมินโดยตรงแล้วค่ะ",
+            complete: true,
+          },
+        ],
       },
-      {
-        patient: "ไม่ได้ล้มจ้ะตาเกาะขอบโต๊ะไว้ทัน แต่พอนั่งพักแล้วมันก็ยังมึนๆ หัวอยู่ ใจมันสั่นๆ ด้วยนะ",
-        fields: {
-          severity: "เกือบวูบแต่ไม่ล้ม เกาะโต๊ะไว้ทัน ยังมึนศีรษะและมีใจสั่น",
-        },
-        bot: "คุณตาเก่งมากครับที่คว้าโต๊ะไว้ทัน แล้วปกติคุณตามีโรคประจำตัวพวกความดันโลหิตสูง เบาหวาน หรือโรคหัวใจอยู่บ้างไหมครับ? แล้วเมื่อเช้านี้ได้ทานยาประจำตัวไปหรือยังครับ?",
-        audio: "src/sample_triage_02/triage2_2.mp3",
+      voice: {
+        initialBot: "สวัสดีค่ะ หมอพร้อม AI พร้อมช่วยบันทึกข้อมูลก่อนพบเจ้าหน้าที่ กดไมโครโฟนแล้วเล่าอาการได้เลยค่ะ",
+        steps: [
+          {
+            patient: "คือปวดหัวครับ ปวดมาหลายวัน แต่ว่าเมื่อวานเหมือนเจ็บที่เข่าด้วย แล้วก็รู้สึกมึนๆ เหมือนจะอ้วกตอนเช้า... อ้อ กินยาแก้แพ้ไปตอนดึก ไม่แน่ใจว่าเกี่ยวไหม แต่ตอนนี้ชาๆ ที่ปลายนิ้วครับ",
+            fields: {
+              chiefComplaint: "ปวดศีรษะหลายวัน ร่วมกับเจ็บเข่า คลื่นไส้ตอนเช้า และชาปลายนิ้ว",
+              duration: "ปวดศีรษะหลายวัน เจ็บเข่าเมื่อวาน",
+              severity: "ข้อมูลซับซ้อน ต้องประเมินซ้ำโดยพยาบาล",
+              allergies: "ทานยาแก้แพ้ตอนดึก ไม่แน่ใจความเกี่ยวข้อง",
+              medications: "ยาแก้แพ้",
+              conditions: "ยังไม่ชัดเจน",
+              recentCare: "ยังไม่มีข้อมูลการรักษาล่าสุด",
+              preferredHospital: "จุดคัดกรองกลาง (Central Triage)",
+            },
+            bot: "ข้อมูลอาการของคุณมีความซับซ้อน เพื่อความถูกต้องและปลอดภัยสูงสุด ระบบได้ส่งข้อมูลเบื้องต้นให้พยาบาลวิชาชีพประเมินโดยตรงแล้วค่ะ",
+            audio: "src/sample_triage_blue/triage_blue_1.mp3",
+            complete: true,
+          },
+        ],
       },
-      {
-        patient: "มีโรคความดันสูงกับเบาหวานจ้ะ ยาความดันตาเพิ่งกินไปเมื่อกี้เอง แต่ยาเบาหวานยังไม่ได้กินเพราะตายังไม่ได้กินข้าวเช้า มันเบื่ออาหารน่ะ",
-        fields: {
-          medications: "ทานยาความดันแล้ว ยาเบาหวานยังไม่ได้ทานเพราะยังไม่ได้รับประทานอาหารเช้า",
-          conditions: "ความดันโลหิตสูง เบาหวาน เบื่ออาหาร",
-        },
-        bot: "รับทราบครับคุณตา ก่อนหน้าที่จะมีอาการเวียนหัว คุณตามีอาการเหงื่อแตก ตัวเย็น หรือมือสั่นร่วมด้วยไหมครับ? แล้วปกติคุณตามีเครื่องวัดความดันหรือเครื่องตรวจน้ำตาลที่บ้านไหมครับ ถ้ามี...ล่าสุดวัดได้เท่าไหร่ครับ?",
-        audio: "src/sample_triage_02/triage2_3.mp3",
-      },
-      {
-        patient: "มีเหงื่อซึมๆ ตามหน้าผากอยู่เหมือนกันจ้ะ ตาเพิ่งวัดความดันเมื่อกี้ ได้ 110/70 ส่วนน้ำตาลไม่ได้วัดมาหลายวันแล้วล่ะลูก",
-        fields: {
-          recentCare: "มีเหงื่อซึม วัดความดันได้ 110/70 mmHg ยังไม่ได้ตรวจน้ำตาลหลายวัน",
-        },
-        bot: "ขอบคุณสำหรับตัวเลขครับคุณตา ข้อมูลสุดท้ายนะครับ: ตอนนี้คุณตามีอาการตาพร่ามัว มองเห็นภาพซ้อน หรือรู้สึกว่าแขนขาข้างไหนอ่อนแรง ขยับไม่ได้บ้างไหมครับ?",
-        audio: "src/sample_triage_02/triage2_4.mp3",
-      },
-      {
-        patient: "ตาไม่พร่านะจ้ะ แขนขาก็ยังขยับได้ปกติ แค่มันหวิวๆ เหมือนคนไม่มีแรงเฉยๆ จ้ะลูก",
-        fields: {
-          severity: "ไม่มีตาพร่ามัว ไม่มีภาพซ้อน ไม่มีแขนขาอ่อนแรง ยังรู้สึกหวิวและไม่มีแรง",
-          allergies: "ยังไม่มีข้อมูลแพ้ยาในบทสนทนา",
-          preferredHospital: "พยาบาลคัดกรอง/อายุรกรรม ประเมิน DTX, orthostatic BP และ EKG เบื้องต้น",
-        },
-        complete: true,
-      },
-    ],
+    },
+    output: {
+      type: "blue",
+      header: "ตั๋วรอรับการคัดกรอง",
+      status: "รอพยาบาลวิชาชีพประเมินประวัติเพิ่มเติม",
+      symptomTitle: "ประวัติที่บันทึกได้เบื้องต้น",
+      symptoms: ["ปวดศีรษะหลายวัน", "เจ็บเข่าเมื่อวาน", "คลื่นไส้ตอนเช้า", "ทานยาแก้แพ้", "ชาปลายนิ้ว"],
+      department: "จุดคัดกรองกลาง (Central Triage)",
+      action: "แสดง QR Code เพื่อให้พยาบาลเรียกประเมิน",
+      instruction: "ข้อมูลอาการมีความซับซ้อน เพื่อความแม่นยำ กรุณาติดต่อ พยาบาลโต๊ะซักประวัติหมายเลข 1 เพื่อให้ข้อมูลเพิ่มเติมค่ะ",
+    },
   },
 };
 
 const root = document.querySelector("#app");
 
-let state = createState("normal");
+let state = createState("green");
 let activeView = "patient";
 let voiceRecorder = null;
 let voiceStream = null;
@@ -337,31 +337,32 @@ let responseTimer = null;
 let responseToken = 0;
 let botAudio = null;
 
-function createState(caseId) {
-  const sample = sampleCases[caseId];
-  const script = getDialogScript("text");
+function createState(caseId = "green", mode = "text") {
+  const sample = sampleCases[caseId] || sampleCases.green;
+  const script = getDialogScript(mode, sample.id);
   const base = {
-    caseId,
+    caseId: sample.id,
     channel: script.channel || sample.channel,
     voiceMode: false,
-    identity: { ...script.identity },
+    identity: { ...sample.identity },
     fields: emptyIntakeFields(),
     transcript: [{ role: "bot", text: script.initialBot }],
-    consent: true,
+    consent: false,
+    consentDeclined: false,
     staffEdited: false,
     reviewStatus: "waiting",
     approvedAt: "",
     audit: [
-      "บันทึก consent และ identity check แล้ว",
       "เริ่ม session สำหรับการซักประวัติก่อนพบเจ้าหน้าที่",
     ],
     dialog: {
       active: true,
       completed: false,
-      mode: "text",
+      mode,
       stepIndex: 0,
       thinking: false,
     },
+    scenarioMenuOpen: false,
     inputDraft: "",
     summaryModalOpen: false,
     recorder: {
@@ -667,15 +668,7 @@ function renderPatientPanel(sample) {
           <span>หมอพร้อม AI</span>
           <h2 id="patient-title">ซักประวัติก่อนพบเจ้าหน้าที่</h2>
         </div>
-        <div class="chat-channel-pill">${icon("line")} ${channelLabels[state.channel]}</div>
-      </div>
-
-      <div class="chat-consent-card">
-        <div class="consent-icon">${icon("check")}</div>
-        <div>
-          <strong>ยืนยันตัวตนแล้ว</strong>
-          <span>ยินยอมให้ใช้ข้อมูลเพื่อซักประวัติเบื้องต้น</span>
-        </div>
+        ${renderScenarioPicker(sample)}
       </div>
 
       <div class="chat-log" aria-live="polite">
@@ -696,11 +689,77 @@ function renderPatientPanel(sample) {
       ${renderComposer()}
     </section>
 
+    ${!state.consent ? renderConsentGate() : ""}
     ${state.summaryModalOpen ? renderPatientSummaryModal() : ""}
   `;
 }
 
+function renderScenarioPicker(sample) {
+  return `
+    <div class="scenario-picker">
+      <button class="chat-channel-pill scenario-trigger ${sample.tone}" data-action="toggle-scenario-menu" aria-haspopup="menu" aria-expanded="${state.scenarioMenuOpen ? "true" : "false"}" ${!state.consent ? "disabled" : ""}>
+        ${icon("line")}
+        <span>หมอพร้อม</span>
+      </button>
+      ${state.scenarioMenuOpen ? `
+        <div class="scenario-menu" role="menu" aria-label="เลือกสถานการณ์คัดกรอง">
+          ${Object.values(sampleCases).map((item) => `
+            <button class="${state.caseId === item.id ? "selected" : ""} ${item.tone}" data-action="select-scenario" data-scenario="${item.id}" role="menuitem">
+              <i></i>
+              <span>${item.label}</span>
+              <small>${item.description}</small>
+            </button>
+          `).join("")}
+        </div>
+      ` : ""}
+    </div>
+  `;
+}
+
+function renderConsentGate() {
+  return `
+    <div class="consent-backdrop" role="presentation">
+      <form class="consent-modal" data-action="confirm-consent" role="dialog" aria-modal="true" aria-labelledby="consent-title">
+        <div class="consent-modal-header">
+          <div class="consent-badge">${icon("shield")}</div>
+          <div>
+            <span>หมอพร้อม AI Triage</span>
+            <h2 id="consent-title">ข้อตกลงและเงื่อนไขการใช้งาน</h2>
+          </div>
+        </div>
+
+        <p class="disclaimer-warning">โปรดอ่านก่อนเริ่มการคัดกรองด้วยระบบ AI</p>
+
+        <div class="disclaimer-content">
+          <p>ระบบ <strong>AI Triage</strong> นี้พัฒนาขึ้นเพื่อช่วยประเมินระดับความเร่งด่วนในเบื้องต้นเท่านั้น โดยมีเงื่อนไขดังนี้:</p>
+          <ol>
+            <li><span class="important">ไม่ใช่การวินิจฉัยโรค:</span> ข้อมูลจาก AI เป็นเพียงการประเมินระดับความเร่งด่วน (Triage Category) <span class="critical">ไม่ใช่คำวินิจฉัยจากแพทย์</span> และไม่สามารถใช้แทนการตรวจรักษาโดยบุคลากรทางการแพทย์ได้</li>
+            <li><span class="important">กรณีฉุกเฉินวิกฤต:</span> หากท่านมีอาการ <span class="critical">แน่นหน้าอก หายใจไม่ออก หมดสติ หรืออุบัติเหตุรุนแรง</span> กรุณาหยุดใช้งานระบบนี้และติดต่อสายด่วน <strong>1669</strong> ทันที</li>
+            <li><span class="important">ความแม่นยำของข้อมูล:</span> ผลลัพธ์ขึ้นอยู่กับข้อมูลที่ท่านให้แก่ระบบ โปรดให้ข้อมูลตามความเป็นจริงและละเอียดที่สุดเท่าที่จะเป็นไปได้</li>
+            <li><span class="important">การเก็บข้อมูล:</span> ระบบจะจัดเก็บข้อมูลอาการและบทสนทนาของท่านเพื่อใช้ในการประมวลผลและส่งต่อไปยังโรงพยาบาลปลายทาง โดยจะรักษาความลับตามนโยบาย PDPA</li>
+            <li><span class="important">การตัดสินใจขั้นสุดท้าย:</span> การตัดสินใจไปพบแพทย์หรือการเลือกวิธีการรักษา <span class="important">เป็นดุลยพินิจของผู้ใช้งานเอง</span> ระบบ AI เป็นเพียงเครื่องมือสนับสนุนการตัดสินใจเท่านั้น</li>
+          </ol>
+        </div>
+
+        <p class="consent-confirm-copy">การกดยอมรับคือการยินยอมให้หมอพร้อม AI ใช้คำตอบเพื่อซักประวัติเบื้องต้น สรุปข้อมูล และส่งให้เจ้าหน้าที่ตรวจทานก่อนดำเนินการต่อ</p>
+
+        ${state.consentDeclined ? `<div class="consent-decline-note">ไม่สามารถเริ่มคัดกรองได้หากยังไม่ยอมรับเงื่อนไขการใช้งาน</div>` : ""}
+
+        <div class="consent-button-group">
+          <button class="consent-decline" type="button" data-action="decline-consent">ไม่ยอมรับ</button>
+          <button class="consent-submit" type="submit">
+            ${icon("check")}
+            ยอมรับและเริ่มคัดกรอง
+          </button>
+        </div>
+      </form>
+    </div>
+  `;
+}
+
 function renderComposer() {
+  const locked = !state.consent;
+
   if (state.dialog.mode === "voice") {
     const recorderLabel = getRecorderLabel();
     const recorderHint = getRecorderHint();
@@ -710,8 +769,8 @@ function renderComposer() {
 
     return `
       <div class="voice-recorder ${recording ? "recording" : ""} ${checking ? "checking" : ""} ${state.recorder.status === "error" ? "error" : ""}">
-        <button class="mode-switch-button" data-action="set-input-mode" data-mode="text" aria-label="กลับไปพิมพ์ข้อความ">Aa</button>
-        <button class="record-button" data-action="${recording ? "stop-recording" : "start-recording"}" aria-label="${recording ? "หยุดและส่งเสียง" : "เริ่มบันทึกเสียง"}" title="${recording ? "หยุดและส่งเสียง" : "เริ่มบันทึกเสียง"}" ${state.dialog.completed || checking || waitingForAI ? "disabled" : ""}>
+        <button class="mode-switch-button" data-action="set-input-mode" data-mode="text" aria-label="กลับไปพิมพ์ข้อความ" ${locked ? "disabled" : ""}>Aa</button>
+        <button class="record-button" data-action="${recording ? "stop-recording" : "start-recording"}" aria-label="${recording ? "หยุดและส่งเสียง" : "เริ่มบันทึกเสียง"}" title="${recording ? "หยุดและส่งเสียง" : "เริ่มบันทึกเสียง"}" ${locked || state.dialog.completed || checking || waitingForAI ? "disabled" : ""}>
           ${icon(recording ? "stop" : "mic")}
         </button>
         <div class="recorder-copy" title="${escapeAttribute(recorderHint)}">
@@ -728,9 +787,9 @@ function renderComposer() {
 
   return `
     <form class="composer chat-composer" data-action="compose">
-      <button class="mode-switch-button" type="button" data-action="set-input-mode" data-mode="voice" aria-label="เปลี่ยนเป็นโหมดเสียง" ${state.dialog.thinking ? "disabled" : ""}>${icon("mic")}</button>
-      <input name="message" value="${escapeAttribute(state.inputDraft)}" placeholder="พิมพ์คำตอบของคุณ..." autocomplete="off" ${state.dialog.thinking ? "disabled" : ""} />
-      <button class="send-button" type="submit" aria-label="ส่งข้อความ" ${state.dialog.thinking ? "disabled" : ""}>${icon("send")}</button>
+      <button class="mode-switch-button" type="button" data-action="set-input-mode" data-mode="voice" aria-label="เปลี่ยนเป็นโหมดเสียง" ${locked || state.dialog.thinking ? "disabled" : ""}>${icon("mic")}</button>
+      <input name="message" value="${escapeAttribute(state.inputDraft)}" placeholder="${locked ? "กรุณายอมรับเงื่อนไขก่อนเริ่มซักประวัติ" : "พิมพ์คำตอบของคุณ..."}" autocomplete="off" ${locked || state.dialog.thinking ? "disabled" : ""} />
+      <button class="send-button" type="submit" aria-label="ส่งข้อความ" ${locked || state.dialog.thinking ? "disabled" : ""}>${icon("send")}</button>
     </form>
   `;
 }
@@ -782,16 +841,17 @@ function renderChatDemoControls() {
 }
 
 function renderPatientSummaryModal() {
-  const fields = state.fields;
-  const emergency = state.risk.level === "critical";
+  const scenario = sampleCases[state.caseId] || sampleCases.green;
+  const output = scenario.output;
+  const emergency = output.type === "red";
 
   return `
     <div class="summary-backdrop" role="presentation">
-      <section class="summary-modal" role="dialog" aria-modal="true" aria-labelledby="patient-summary-title">
+      <section class="summary-modal scenario-summary ${output.type}" role="dialog" aria-modal="true" aria-labelledby="patient-summary-title">
         <div class="summary-header">
           <div>
-            <h2 id="patient-summary-title">สรุปข้อมูลก่อนส่งให้เจ้าหน้าที่</h2>
-            <p>กรุณาตรวจทาน หากข้อมูลไม่ถูกต้องสามารถกลับไปตอบเพิ่มได้</p>
+            <h2 id="patient-summary-title">${output.header}</h2>
+            <p>${state.identity.name} | HN: ${state.identity.hn || "123456"}</p>
           </div>
           <button class="icon-button light" data-action="close-summary" aria-label="ปิดสรุป">×</button>
         </div>
@@ -799,39 +859,90 @@ function renderPatientSummaryModal() {
         <div class="summary-status ${emergency ? "critical" : ""}">
           ${emergency ? icon("alert") : icon("shield")}
           <div>
-            <strong>${emergency ? "พบอาการที่ควรประเมินเร่งด่วน" : "ไม่พบสัญญาณฉุกเฉินจากคำตอบปัจจุบัน"}</strong>
-            <span>${emergency ? "หากอาการรุนแรง กรุณาติดต่อ 1669 หรือไปห้องฉุกเฉินทันที" : "ข้อมูลนี้จะถูกส่งให้เจ้าหน้าที่ตรวจทาน ไม่ใช่การวินิจฉัย"}</span>
+            <strong>${output.status}</strong>
+            <span>${emergency ? output.safety : "ข้อมูลนี้จะถูกส่งให้เจ้าหน้าที่ตรวจทานก่อนดำเนินการต่อ"}</span>
           </div>
         </div>
 
-        <div class="summary-grid">
-          <div>
-            <span>อาการหลัก</span>
-            <strong>${fields.chiefComplaint || "ยังไม่ระบุ"}</strong>
-          </div>
-          <div>
-            <span>ระยะเวลา / ความรุนแรง</span>
-            <strong>${[fields.duration, fields.severity].filter(Boolean).join(" · ") || "ยังไม่ระบุ"}</strong>
-          </div>
-          <div>
-            <span>แพ้ยา / ยาประจำ</span>
-            <strong>${[fields.allergies, fields.medications].filter(Boolean).join(" · ") || "ยังไม่ระบุ"}</strong>
-          </div>
-          <div>
-            <span>โรคประจำตัว / การรักษาล่าสุด</span>
-            <strong>${[fields.conditions, fields.recentCare].filter(Boolean).join(" · ") || "ยังไม่ระบุ"}</strong>
-          </div>
-          <div class="wide">
-            <span>ข้อมูลส่งต่อที่ผู้ป่วยเห็น</span>
-            <strong>ระบบจะส่งข้อมูลให้เจ้าหน้าที่ตรวจทาน และแนะนำจุดบริการที่เหมาะสมต่อไป</strong>
-          </div>
-        </div>
+        ${renderScenarioSummaryDetails(output)}
 
         <div class="summary-actions">
-          <button data-action="close-summary">กลับไปแก้ไข/ตอบเพิ่ม</button>
-          <button class="primary" data-action="confirm-summary">${icon("check")} ยืนยันสรุปเพื่อให้เจ้าหน้าที่ตรวจทาน</button>
+          ${emergency ? "" : `<button data-action="close-summary">กลับไปแก้ไข/ตอบเพิ่ม</button>`}
+          <button class="primary ${output.type}" data-action="confirm-summary">${icon(emergency ? "alert" : "check")} ${emergency ? output.action : "ยืนยันข้อมูล"}</button>
         </div>
       </section>
+    </div>
+  `;
+}
+
+function renderScenarioSummaryDetails(output) {
+  if (output.type === "red") {
+    return `
+      <div class="scenario-output">
+        <section>
+          <span>${output.symptomTitle}</span>
+          <ul>${output.symptoms.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
+        </section>
+        <section class="wide">
+          <span>คำแนะนำด้านความปลอดภัย</span>
+          <strong>${output.safety}</strong>
+        </section>
+        <section class="wide action-note">
+          <strong>${output.instruction}</strong>
+        </section>
+      </div>
+    `;
+  }
+
+  if (output.type === "blue") {
+    return `
+      <div class="scenario-output">
+        <section class="wide">
+          <span>${output.symptomTitle}</span>
+          <ul>${output.symptoms.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
+        </section>
+        <section>
+          <span>แผนกที่แนะนำ</span>
+          <strong>${output.department}</strong>
+        </section>
+        <section class="qr-section">
+          ${renderQrCode()}
+          <span>${output.action}</span>
+        </section>
+        <section class="wide action-note">
+          <strong>${output.instruction}</strong>
+        </section>
+      </div>
+    `;
+  }
+
+  return `
+    <div class="scenario-output">
+      <section>
+        <span>${output.symptomTitle}</span>
+        <ul>${output.symptoms.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
+      </section>
+      ${output.metrics.map(([label, value]) => `
+        <section>
+          <span>${label}</span>
+          <strong>${value}</strong>
+        </section>
+      `).join("")}
+      <section class="qr-section">
+        ${renderQrCode()}
+        <span>${output.action}</span>
+      </section>
+      <section class="wide action-note">
+        <strong>${output.instruction}</strong>
+      </section>
+    </div>
+  `;
+}
+
+function renderQrCode() {
+  return `
+    <div class="qr-code" aria-label="QR Code">
+      ${Array.from({ length: 25 }, (_, index) => `<i class="${[0, 1, 5, 6, 18, 19, 23, 24, 7, 11, 13, 16, 21].includes(index) ? "dark" : ""}"></i>`).join("")}
     </div>
   `;
 }
@@ -1064,6 +1175,15 @@ function renderStaffQueuePanel(sample) {
 }
 
 function bindEvents() {
+  root.querySelector("[data-action='confirm-consent']")?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    confirmConsentAndIdentity();
+  });
+
+  root.querySelector("[data-action='decline-consent']")?.addEventListener("click", () => {
+    updateState({ consentDeclined: true });
+  });
+
   root.querySelectorAll("[data-action='view']").forEach((button) => {
     button.addEventListener("click", () => {
       activeView = button.dataset.view;
@@ -1073,8 +1193,17 @@ function bindEvents() {
 
   root.querySelectorAll("[data-action='scenario']").forEach((button) => {
     button.addEventListener("click", () => {
-      state = createState(button.dataset.scenario);
-      render();
+      switchScenario(button.dataset.scenario);
+    });
+  });
+
+  root.querySelector("[data-action='toggle-scenario-menu']")?.addEventListener("click", () => {
+    updateState({ scenarioMenuOpen: !state.scenarioMenuOpen });
+  });
+
+  root.querySelectorAll("[data-action='select-scenario']").forEach((button) => {
+    button.addEventListener("click", () => {
+      switchScenario(button.dataset.scenario);
     });
   });
 
@@ -1145,7 +1274,7 @@ function bindEvents() {
   const compose = root.querySelector("[data-action='compose']");
   compose?.addEventListener("submit", (event) => {
     event.preventDefault();
-    if (state.dialog.thinking) return;
+    if (!state.consent || state.dialog.thinking) return;
 
     const input = compose.elements.message;
     const text = input.value.trim();
@@ -1234,8 +1363,39 @@ function emptyIntakeFields() {
   return Object.fromEntries(requiredFields.map(([key]) => [key, ""]));
 }
 
-function getDialogScript(mode = state?.dialog?.mode || "text") {
-  return triageScripts[mode] || triageScripts.text;
+function confirmConsentAndIdentity() {
+  if (state.consent) return;
+
+  updateState({
+    consent: true,
+    consentDeclined: false,
+    audit: [
+      "บันทึก consent แล้ว",
+      ...state.audit,
+    ],
+  });
+}
+
+function switchScenario(caseId) {
+  const mode = state.dialog?.mode || "text";
+  clearPendingResponse();
+  stopBotAudio();
+  cleanupVoiceCapture({ releaseStream: mode !== "voice" });
+  state = createState(caseId, mode);
+  render();
+
+  if (mode === "voice" && state.consent) {
+    ensureVoiceSessionStream();
+  }
+}
+
+function getDialogScript(mode = state?.dialog?.mode || "text", caseId = state?.caseId || "green") {
+  const scenario = sampleCases[caseId] || sampleCases.green;
+  return {
+    channel: scenario.channel,
+    identity: scenario.identity,
+    ...(scenario.scripts[mode] || scenario.scripts.text),
+  };
 }
 
 function clearPendingResponse() {
@@ -1253,6 +1413,8 @@ function stopBotAudio() {
 }
 
 function setInputMode(mode) {
+  if (!state.consent) return;
+
   clearPendingResponse();
   stopBotAudio();
 
@@ -1575,6 +1737,7 @@ function stopVoiceLevelMeter() {
 }
 
 async function startVoiceRecording() {
+  if (!state.consent) return;
   if (state.dialog.completed || state.dialog.thinking) return;
 
   if (!state.dialog.active || state.dialog.mode !== "voice") {
@@ -1720,6 +1883,7 @@ function startDialog(mode) {
     approvedAt: "",
     summaryModalOpen: false,
     inputDraft: "",
+    scenarioMenuOpen: false,
     recorder: mode === "voice" ? defaultRecorderState() : state.recorder,
     dialog: {
       active: true,
@@ -1745,6 +1909,7 @@ function advanceMockDialog() {
 }
 
 function submitScriptedTurn(overridePatientText, extraState = {}) {
+  if (!state.consent) return;
   if (!state.dialog.active || state.dialog.completed || state.dialog.thinking) return;
 
   const script = getDialogScript();
@@ -1786,8 +1951,11 @@ function completeScriptedTurn(step, token) {
   if (token !== responseToken || !state.dialog.thinking) return;
 
   responseTimer = null;
-  if (state.dialog.mode === "voice" && step.audio && step.bot) {
-    playBotAudio(step.audio, () => {
+  const botMessages = getStepBotMessages(step);
+  const audioQueue = botMessages.map((message) => message.audio).filter(Boolean);
+
+  if (state.dialog.mode === "voice" && audioQueue.length) {
+    playBotAudioQueue(audioQueue, () => {
       finalizeScriptedTurn(step, token);
     });
     return;
@@ -1801,8 +1969,12 @@ function finalizeScriptedTurn(step, token) {
 
   const script = getDialogScript();
   const completed = Boolean(step.complete);
-  const transcript = step.bot
-    ? [...state.transcript, { role: "bot", text: step.bot }]
+  const botMessages = getStepBotMessages(step);
+  const transcript = botMessages.length
+    ? [
+        ...state.transcript,
+        ...botMessages.map((message) => ({ role: "bot", text: message.text })),
+      ]
     : state.transcript;
 
   updateState({
@@ -1824,6 +1996,29 @@ function finalizeScriptedTurn(step, token) {
       ...state.audit,
     ],
   });
+}
+
+function getStepBotMessages(step) {
+  return [
+    step.bot ? { text: step.bot, audio: step.audio } : null,
+    ...(step.followups || []).map((item) => ({
+      text: item.text,
+      audio: item.audio,
+    })),
+  ].filter((item) => item?.text);
+}
+
+function playBotAudioQueue(srcList, onDone) {
+  const queue = [...srcList];
+  const playNext = () => {
+    const src = queue.shift();
+    if (!src) {
+      onDone?.();
+      return;
+    }
+    playBotAudio(src, playNext);
+  };
+  playNext();
 }
 
 function playBotAudio(src, onDone) {
